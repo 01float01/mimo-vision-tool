@@ -1,0 +1,8 @@
+# Put your MiMo API key on the next line (no quotes, no `sk-` prefix stripping).
+#
+# Either rename this file to `mimo_api_key.txt` next to `mimo_vision.py`, or export
+# MIMO_API_KEY. Both are supported; the environment variable wins.
+#
+# `mimo_api_key.txt` is listed in .gitignore, so this copy is the only one that can
+# ever reach the repository. Get a key at https://platform.xiaomimimo.com/
+PASTE-YOUR-KEY-HERE

@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secrets — never commit these
+mimo_api_key.txt
+.env
+.env.*
+
+# Local noise / backups
+*.bak
+*.bak-*
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+
+# Editor
+.vscode/
+.idea/

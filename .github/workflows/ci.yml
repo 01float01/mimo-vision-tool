@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Repository self-check: no committed secrets, no stray key/backup files,
+      # valid JSON, JavaScript and Python syntax, and a manifest whose browser
+      # module id still matches the package name.
+      - name: Repository checks
+        run: node scripts/check.mjs --strict
+
+      # Wrapper wiring against a stub subprocess: resolved paths, argv, environment
+      # scrubbing, key forwarding, and the result-mapping branches.
+      - name: Wrapper self-test
+        run: node scripts/selftest.mjs
+
+      # The Python client must keep importing cleanly on a bare interpreter; its
+      # third-party dependencies are optional at import time.
+      - name: Import the Python client
+        run: python -c "import importlib.util, pathlib; spec = importlib.util.spec_from_file_location('mimo_vision', pathlib.Path('python/mimo_vision.py')); module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module); print('mimo_vision imported')"

@@ -1,0 +1,58 @@
+{
+  "name": "mimo-vision-tool",
+  "version": "1.0.0",
+  "description": "MiMo vision for DSH: a mimo_vision Tool that understands local images through Xiaomi's MiMo API, plus a web client that opens the called image in the right sidebar as the call happens.",
+  "type": "module",
+  "license": "MIT",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib/",
+    "python/",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "mimo",
+    "xiaomi",
+    "vision",
+    "image-understanding",
+    "multimodal",
+    "tool"
+  ],
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "*",
+    "@deepseek-ai/schemastery": "*"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs && node scripts/selftest.mjs",
+    "selftest": "node scripts/selftest.mjs",
+    "prepublishOnly": "node scripts/check.mjs --strict && node scripts/selftest.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHANGE-ME/mimo-vision-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CHANGE-ME/mimo-vision-tool/issues"
+  },
+  "homepage": "https://github.com/CHANGE-ME/mimo-vision-tool#readme"
+}

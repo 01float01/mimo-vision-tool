@@ -1,0 +1,14 @@
+# Normalize line endings in the repository; keep binaries untouched.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+
+# GitHub language statistics: this is a Node + Python project, not a docs dump.
+*.md linguist-documentation
