@@ -28,7 +28,7 @@ mimo_vision(image_path, prompt?) -> 文本
 ## 装进 DSH profile
 
 ```bash
-git clone https://github.com/CHANGE-ME/mimo-vision-tool.git
+git clone https://github.com/01float01/mimo-vision-tool.git
 ```
 
 然后二选一：

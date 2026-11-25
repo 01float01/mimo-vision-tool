@@ -31,7 +31,7 @@ mimo_vision(image_path, prompt?) -> text
 ## Install into a DSH profile
 
 ```bash
-git clone https://github.com/CHANGE-ME/mimo-vision-tool.git
+git clone https://github.com/01float01/mimo-vision-tool.git
 ```
 
 Then pick one:

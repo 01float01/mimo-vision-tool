@@ -49,10 +49,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CHANGE-ME/mimo-vision-tool.git"
+    "url": "git+https://github.com/01float01/mimo-vision-tool.git"
   },
   "bugs": {
-    "url": "https://github.com/CHANGE-ME/mimo-vision-tool/issues"
+    "url": "https://github.com/01float01/mimo-vision-tool/issues"
   },
-  "homepage": "https://github.com/CHANGE-ME/mimo-vision-tool#readme"
+  "homepage": "https://github.com/01float01/mimo-vision-tool#readme"
 }
