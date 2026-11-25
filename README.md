@@ -150,7 +150,9 @@ python -m py_compile python/mimo_vision.py
 `scripts/check.mjs` fails on a committed key, a backup file, a hardcoded authoring-machine
 path, or a `client.js` module id that no longer matches the package name.
 `scripts/selftest.mjs` stubs the subprocess, so it asserts the resolved script path, the
-argv shape, proxy-variable scrubbing and key forwarding without touching the network.
+argv shape, proxy-variable scrubbing and key forwarding without touching the network. It
+needs the DSH peer dependencies: without them it prints a skip and exits 0, so a bare
+checkout and CI both stay green.
 
 Both run in CI on Linux and Windows (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 

@@ -7,6 +7,10 @@
  * the wiring that is easy to break silently — resolved script path, argv shape, environment
  * scrubbing, key forwarding, and the three result-mapping branches.
  *
+ * The Host half imports its DSH peer dependencies, so this script needs them installed.
+ * In a bare checkout (or a CI job that does not install them) it reports a skip and exits
+ * 0 rather than failing: absence of a dependency is not a defect in this package.
+ *
  * Usage: node scripts/selftest.mjs
  */
 import assert from 'node:assert/strict'
@@ -14,7 +18,24 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
-const { apply } = await import(pathToFileURL(join(ROOT, 'index.js')).href)
+
+/** Import the Host half, or skip the whole run when its peer dependencies are absent. */
+async function loadHostHalf() {
+  try {
+    return { apply: (await import(pathToFileURL(join(ROOT, 'index.js')).href)).apply }
+  } catch (error) {
+    const message = String(error?.message ?? error)
+    const missingPeer = error?.code === 'ERR_MODULE_NOT_FOUND' && message.includes('@deepseek-ai/')
+    if (!missingPeer) throw error
+    process.stdout.write(
+      `skip: index.js needs its peer dependencies installed (${message.split('\n')[0]})\n` +
+        '      run `npm install`, or install @deepseek-ai/dsh-tools and @deepseek-ai/schemastery, to run these checks\n',
+    )
+    process.exit(0)
+  }
+}
+
+const { apply } = await loadHostHalf()
 
 /** One recorded spawn plus a handle that reports the given outcome. */
 function harness(outcome) {

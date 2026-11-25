@@ -140,7 +140,8 @@ python -m py_compile python/mimo_vision.py
 `scripts/check.mjs` 会在以下情况直接失败：提交了 key、提交了备份文件、写死了作者本机的路径、
 或 `client.js` 的模块 id 与包名不再一致。
 `scripts/selftest.mjs` 用桩子进程替代真实调用，因此可以在不联网、不花额度的前提下断言
-脚本路径解析、argv 形状、代理变量清除与 key 转发。
+脚本路径解析、argv 形状、代理变量清除与 key 转发。它需要 DSH 的 peer 依赖：没装时打印
+一行 skip 并以 0 退出，所以裸 clone 和 CI 都不会因为"缺依赖"变红。
 
 两者都在 CI 的 Linux / Windows 上跑（见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)）。
 

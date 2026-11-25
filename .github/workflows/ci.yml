@@ -31,6 +31,14 @@ jobs:
       - name: Repository checks
         run: node scripts/check.mjs --strict
 
+      # The wrapper self-test imports the Host half, which imports its DSH peer
+      # dependencies. Installing them is best effort: when the public registry does
+      # not serve a compatible build the self-test reports a skip instead of failing
+      # on something this repository does not control.
+      - name: Install peer dependencies (best effort)
+        continue-on-error: true
+        run: npm install --no-save --no-package-lock --no-audit --no-fund @deepseek-ai/dsh-tools @deepseek-ai/schemastery
+
       # Wrapper wiring against a stub subprocess: resolved paths, argv, environment
       # scrubbing, key forwarding, and the result-mapping branches.
       - name: Wrapper self-test
